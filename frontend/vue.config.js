@@ -7,5 +7,8 @@ module.exports = defineConfig({
     vuetify: {
 			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
 		}
+  },
+  devServer: {
+    proxy: 'https://laas-tainan.edge-core.com/'
   }
 })

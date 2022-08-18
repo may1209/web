@@ -36,6 +36,7 @@
 
             Or <router-link to="/sign-up">click here</router-link> to sign up!
 
+            <p>Token: {{token}}</p>
           </v-form>
         </v-col>
       </v-row>
@@ -45,7 +46,7 @@
 
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 //import { toast } from 'bulma-toast'
 
 export default{
@@ -53,17 +54,25 @@ export default{
     data: () => ({
         username: '',
         password: '',
-        errors:[]
+        errors:[],
+        token: ''
     }),
     methods: {
-//        submitForm() {
-//            if (!this.errors.length){
-//                const formData = {
-//                    username: this.username,
-//                    password: this.password
-//                }
-//            }
-//        }
+        submitForm() {
+            const formData = {
+                username: this.username,
+                password: this.password
+            }
+
+            axios.post("http://3.111.188.243:8080/api/1.0/auth/tokens/", formData)
+                .then(response => {
+                  this.token = response.data
+                  console.log(response);
+                })
+                .catch(error => {
+                  console.log(error);
+                })
+        }
     }
 }
 </script>
